@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -8,7 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import User from '../../../../users/infra/typeorm/entities/User';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('appointments')
 class Appointment {
