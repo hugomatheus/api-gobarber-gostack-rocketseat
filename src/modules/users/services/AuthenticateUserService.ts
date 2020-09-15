@@ -1,9 +1,9 @@
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { getRepository } from 'typeorm';
-import User from '../models/User';
-import authConfig from '../config/auth';
-import AppError from '../errors/AppError';
+import User from '../entities/User';
+import authConfig from '../../../config/auth';
+import AppError from '../../../shared/errors/AppError';
 
 interface Request {
   email: string;
@@ -18,6 +18,10 @@ interface Response {
 class AuthenticateUserService {
   public async execute({ email, password }: Request): Promise<Response> {
     const userRepository = getRepository(User);
+
+    if (!email || !password) {
+      throw new AppError('E-mail and password is required');
+    }
 
     const user = await userRepository.findOne({ where: { email } });
 
