@@ -81,3 +81,8 @@ caso não utilize postgres alterar para timestamp
 Executar migrations
 yarn typeorm migration:run
 
+
+
+DTO
+
+Data Transferer Object
