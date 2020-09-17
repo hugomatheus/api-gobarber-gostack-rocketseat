@@ -4,12 +4,14 @@ import User from '@modules/users/infra/typeorm/entities/User';
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
   user_id: string;
   avatarFileName: string;
 }
 
+@injectable()
 class UpdateUserAvatarService {
   // private userRepository: IUsersRepository;
 
@@ -21,7 +23,10 @@ class UpdateUserAvatarService {
   // cria automaticamente a variavel this.userRepository
   // Precisa desativar no eslint: no-useless-constructor
 
-  constructor(private userRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository')
+    private userRepository: IUsersRepository,
+  ) {}
 
   public async execute({ user_id, avatarFileName }: IRequest): Promise<User> {
     const user = await this.userRepository.findById(user_id);

@@ -4,6 +4,7 @@ import User from '@modules/users/infra/typeorm/entities/User';
 import authConfig from '@config/auth';
 import AppError from '@shared/errors/AppError';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
   email: string;
@@ -15,10 +16,14 @@ interface IResponse {
   token: string;
 }
 
+@injectable()
 class AuthenticateUserService {
   private userRepository: IUsersRepository;
 
-  constructor(userRepository: IUsersRepository) {
+  constructor(
+    @inject('UsersRepository')
+    userRepository: IUsersRepository,
+  ) {
     this.userRepository = userRepository;
   }
 
