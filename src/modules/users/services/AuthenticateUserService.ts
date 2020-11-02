@@ -18,16 +18,13 @@ interface IResponse {
 
 @injectable()
 class AuthenticateUserService {
-  private userRepository: IUsersRepository;
-
   constructor(
     @inject('UsersRepository')
-    userRepository: IUsersRepository,
+    private userRepository: IUsersRepository,
+
     @inject('HashProvider')
     private hashProvider: IHashProvider,
-  ) {
-    this.userRepository = userRepository;
-  }
+  ) {}
 
   public async execute({ email, password }: IRequest): Promise<IResponse> {
     if (!email || !password) {
