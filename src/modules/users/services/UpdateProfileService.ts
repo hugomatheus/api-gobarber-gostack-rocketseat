@@ -32,7 +32,7 @@ class UpdateProfileService {
     const user = await this.userRepository.findById(user_id);
 
     if (!user) {
-      throw new AppError('Only authenticated users can update profile.', 401);
+      throw new AppError('User not found.', 401);
     }
 
     const userWithUpdatedEmail = await this.userRepository.findByEmail(email);
