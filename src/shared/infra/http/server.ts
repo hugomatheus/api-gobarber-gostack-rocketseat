@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import { errors } from 'celebrate';
 import 'express-async-errors';
 import routes from '@shared/infra/http/routes';
 import '@shared/infra/typeorm';
@@ -15,8 +16,12 @@ server.use(express.json());
 server.use('/files', express.static(uploadConfig.uploadsFolder));
 server.use(routes);
 
+server.use(errors());
+
 server.use(
   (error: Error, request: Request, response: Response, _: NextFunction) => {
+    console.log(error);
+
     if (error instanceof AppError) {
       return response
         .status(error.statusCode)
