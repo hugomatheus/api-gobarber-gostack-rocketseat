@@ -1,6 +1,6 @@
 const config = {
   jwt: {
-    secret: '3450ba4cd06fb33d87ea6e8ff9599a8b',
+    secret: process.env.APP_SECRET,
     expiresIn: '1d',
   },
 };

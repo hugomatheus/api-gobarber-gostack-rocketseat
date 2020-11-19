@@ -3,5 +3,12 @@
 node_modules/
 build/
 temp/
+.env
+ormconfig.json
+coverage
 tmp/*
 !tmp/.gitkeep
+
+
+# caso já tenha subido algum arquivo/pasta pro git, que deveria ser ignorado,  é possivel remover
+# git rm --cached -r coverage
